@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>JS-testing-3</title>
+</head>
+<body>
+
+  <!-- Empty img-element for placing image. -->
+  <img src="" id="sea" width="400"/>
+
+  <script>
+    console.log("about to fetch image")
+    /* Use fetch to fetch image. Get readable stream, aka a blob. */
+    fetch("IMG_3711.png")
+      .then(response => {
+        console.log(response)
+        /* Return blob. Not text or JSON. */
+        return response.blob()
+      })
+      /* Create URL for blob and assign it to empty img-element. */
+      .then(blob => {
+        console.log(blob)
+        blob = URL.createObjectURL(blob)
+        console.log(blob)
+        /* Get DOM-element by id. */
+        const blb = document.getElementById("sea")
+        blb.src = blob
+      })
+
+  </script>
+
+
+</body>
+</html>

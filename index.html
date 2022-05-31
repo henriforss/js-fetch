@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>JS-testing-3</title>
+</head>
+<body>
+
+  <!-- Empty img-element for placing image. -->
+  <img src="" id="sea" width="400"/>
+
+  <script>
+    console.log("About to fetch image.")
+    
+    /* Call the function. Possible because how the function is defined. */
+    catchImage()
+      /* Add .then for fun. */
+      .then(response => {
+        console.log("Image received.")
+      })
+      /* Add error handling to catchImage-function. */
+      .catch(error => {
+        console.error(error)
+      })
+
+    /* Create async funtion to fetch image. */
+    async function catchImage() {
+      const response = await fetch("IMG_3711.png")
+      blob = await response.blob() // Needs to await because it takes time to process
+      document.getElementById("sea").src = URL.createObjectURL(blob)
+    }
+  </script>
+
+  <!-- Empty p-element for placeing text. -->
+  <p id="text"></p>
+
+  <!-- Fetch a txt-file and place content in p-element. This could be refactored to async/await as above. -->
+  <script>
+    fetch("example.txt")
+      .then(response => {
+        console.log(response)
+        return response.text()
+      })
+      .then(text => {
+        console.log(text)
+        document.getElementById("text").innerText = text
+      })
+  </script>
+
+</body>
+</html>
